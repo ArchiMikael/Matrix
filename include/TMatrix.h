@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef __TDynamicMatrix_H__
 #define __TDynamicMatrix_H__
 
@@ -7,23 +9,28 @@
 using namespace std;
 
 template<class T>
-class TDynamicMatrix : private TDynamicVector<TDynamicVector<T>>
+class TDynamicMatrix : public TDynamicVector<TDynamicVector<T>>
 {
-  using TDynamicVector<TDynamicVector<T>>::pMem;
-  using TDynamicVector<TDynamicVector<T>>::size;
+protected:
+  TDynamicVector<T>* pMem;
+  unsigned int size;
 public:
-  TDynamicMatrix(size_t s = 1);
+  TDynamicMatrix();
+  TDynamicMatrix(int _size);
+  ~TDynamicMatrix();
+
+  const unsigned int GetSize();
 
   using TDynamicVector<TDynamicVector<T>>::operator[];
-  bool operator==(const TDynamicMatrix& m) const noexcept;
-  TDynamicVector<T> operator*(const T& val);
-  TDynamicVector<T> operator*(const TDynamicVector<T>& v);
-  TDynamicMatrix operator+(const TDynamicMatrix& m);
-  TDynamicMatrix operator-(const TDynamicMatrix& m);
-  TDynamicMatrix operator*(const TDynamicMatrix& m);
+  bool operator==(const TDynamicMatrix& _mat);
+  TDynamicMatrix operator+(const TDynamicMatrix& _mat);
+  TDynamicMatrix operator-(const TDynamicMatrix& _mat);
+  TDynamicMatrix operator*(const TDynamicMatrix& _mat);
+  TDynamicVector<T> operator*(const TDynamicVector<T>& _vec);
+  TDynamicMatrix operator*(const T inp);
 
-  friend istream& operator>>(istream& istr, TDynamicMatrix& v);
-  friend ostream& operator<<(ostream& ostr, const TDynamicMatrix& v);
+  friend istream& operator>>(istream& istr, TDynamicMatrix& _mat);
+  friend ostream& operator<<(ostream& ostr, const TDynamicMatrix& _mat);
 };
 
 #endif

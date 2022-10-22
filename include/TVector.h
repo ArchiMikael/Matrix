@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef __TDynamicVector_H__
 #define __TDynamicVector_H__
 
@@ -12,29 +14,28 @@ protected:
   unsigned int size;
   T* pMem;
 public:
-  TDynamicVector(unsigned int _size = 1);
-  TDynamicVector(T* arr, unsigned int s);
-  TDynamicVector(const TDynamicVector& v);
-  TDynamicVector(TDynamicVector&& v) noexcept;
+  TDynamicVector();
+  TDynamicVector(int _size);
+  TDynamicVector(const TDynamicVector& _vec);
+  TDynamicVector(TDynamicVector&& _vec);
   ~TDynamicVector();
-  size_t size() const noexcept { return size; };
+  unsigned int GetSize();
   void Resize(int nsize);
 
-  T& operator[](size_t ind);
-  const T& operator[](size_t ind) const;
-  bool operator==(const TDynamicVector& v) const noexcept;
-  bool operator!=(const TDynamicVector& v) const noexcept;
-  TDynamicVector operator+(T val);
-  TDynamicVector operator-(double val);
-  TDynamicVector operator*(double val);
-  TDynamicVector operator+(const TDynamicVector& v);
-  TDynamicVector operator-(const TDynamicVector& v);
-  T operator*(const TDynamicVector& v) noexcept(noexcept(T()));
-  TDynamicVector& operator=(const TDynamicVector& v);
-  TDynamicVector& operator=(TDynamicVector&& v) noexcept;
+  T& operator[](unsigned int index);
+  const T& operator[](unsigned int index) const;
+  bool operator==(const TDynamicVector& _vec);
+  bool operator!=(const TDynamicVector& _vec);
+  TDynamicVector operator+(const T inp);
+  TDynamicVector operator-(const T inp);
+  TDynamicVector operator*(const T inp);
+  TDynamicVector operator+(const TDynamicVector& _vec);
+  TDynamicVector operator-(const TDynamicVector& _vec);
+  T operator*(const TDynamicVector& _vec);
+  TDynamicVector& operator=(const TDynamicVector& _vec);
 
-  friend istream& operator>>(istream& istr, TDynamicVector& v);
-  friend ostream& operator<<(ostream& ostr, const TDynamicVector& v);
+  friend istream& operator>>(istream& istr, TDynamicVector& _vec);
+  friend ostream& operator<<(ostream& ostr, const TDynamicVector& _vec);
 };
 
 #endif
