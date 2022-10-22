@@ -11,7 +11,7 @@ template<class T>
 class TDynamicVector
 {
 protected:
-  unsigned int size;
+  int size;
   T* pMem;
 public:
   TDynamicVector();
@@ -19,11 +19,10 @@ public:
   TDynamicVector(const TDynamicVector& _vec);
   TDynamicVector(TDynamicVector&& _vec);
   ~TDynamicVector();
-  unsigned int GetSize();
+  int GetSize();
   void Resize(int nsize);
 
-  T& operator[](unsigned int index);
-  const T& operator[](unsigned int index) const;
+  T& operator[](int index);
   bool operator==(const TDynamicVector& _vec);
   bool operator!=(const TDynamicVector& _vec);
   TDynamicVector operator+(const T inp);

@@ -9,24 +9,22 @@
 using namespace std;
 
 template<class T>
-class TDynamicMatrix : public TDynamicVector<TDynamicVector<T>>
+class TDynamicMatrix : protected TDynamicVector<TDynamicVector<T>>
 {
-protected:
-  TDynamicVector<T>* pMem;
-  unsigned int size;
 public:
   TDynamicMatrix();
   TDynamicMatrix(int _size);
   ~TDynamicMatrix();
 
-  const unsigned int GetSize();
+  const int GetSize();
 
   using TDynamicVector<TDynamicVector<T>>::operator[];
   bool operator==(const TDynamicMatrix& _mat);
+  bool operator!=(const TDynamicMatrix& _mat);
   TDynamicMatrix operator+(const TDynamicMatrix& _mat);
   TDynamicMatrix operator-(const TDynamicMatrix& _mat);
   TDynamicMatrix operator*(const TDynamicMatrix& _mat);
-  TDynamicVector<T> operator*(const TDynamicVector<T>& _vec);
+  TDynamicVector<T> operator*(TDynamicVector<T>& _vec);
   TDynamicMatrix operator*(const T inp);
 
   friend istream& operator>>(istream& istr, TDynamicMatrix& _mat);
