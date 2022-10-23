@@ -1,5 +1,4 @@
 #include <iostream>
-#include <typeinfo>
 #include "TMatrix.h"
 
 template<class T>
@@ -120,7 +119,7 @@ TDynamicMatrix<T> TDynamicMatrix<T>::operator*(const T inp)
 }
 
 template<class T>
-istream& operator>>(istream& istr, TDynamicMatrix<T>& _mat)
+std::istream& operator>>(std::istream& istr, TDynamicMatrix<T>& _mat)
 {
   for (int i = 0; i < _mat.size; i++)
   {
@@ -133,7 +132,7 @@ istream& operator>>(istream& istr, TDynamicMatrix<T>& _mat)
 }
 
 template<class T>
-ostream& operator<<(ostream& ostr, const TDynamicMatrix<T>& _mat)
+std::ostream& operator<<(std::ostream& ostr, const TDynamicMatrix<T>& _mat)
 {
   for (int i = 0; i < _mat.size; i++)
   {

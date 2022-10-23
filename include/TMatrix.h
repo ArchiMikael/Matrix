@@ -6,8 +6,6 @@
 #include <iostream>
 #include "TVector.h"
 
-using namespace std;
-
 template<class T>
 class TDynamicMatrix : protected TDynamicVector<TDynamicVector<T>>
 {
@@ -27,8 +25,8 @@ public:
   TDynamicVector<T> operator*(TDynamicVector<T>& _vec);
   TDynamicMatrix operator*(const T inp);
 
-  friend istream& operator>>(istream& istr, TDynamicMatrix& _mat);
-  friend ostream& operator<<(ostream& ostr, const TDynamicMatrix& _mat);
+  friend std::istream& operator>>(std::istream& istr, TDynamicMatrix& _mat);
+  friend std::ostream& operator<<(std::ostream& ostr, const TDynamicMatrix& _mat);
 };
 
 #endif
