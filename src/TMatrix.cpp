@@ -40,7 +40,7 @@ bool TDynamicMatrix<T>::operator==(const TDynamicMatrix& _mat)
   if (this->size != _mat.size) { return false; }
   if (this->pMem == nullptr || _mat.pMem == nullptr) { throw "TDynamicMatrix operation== error"; }
   else {
-    for (int i = 0; i < size; i++) { if (this->pMem[i] != _mat.pMem[i]) { return false; } }
+    for (int i = 0; i < this->size; i++) { if (this->pMem[i] != _mat.pMem[i]) { return false; } }
     return true;
   }
 }
@@ -51,7 +51,7 @@ bool TDynamicMatrix<T>::operator!=(const TDynamicMatrix& _mat)
   if (this->size != _mat.size) { return true; }
   if (this->pMem == nullptr || _mat.pMem == nullptr) { throw "TDynamicMatrix operation== error"; }
   else {
-    for (int i = 0; i < size; i++) { if (this->pMem[i] != _mat.pMem[i]) { return true; } }
+    for (int i = 0; i < this->size; i++) { if (this->pMem[i] != _mat.pMem[i]) { return true; } }
     return false;
   }
 }
