@@ -40,11 +40,13 @@ TDynamicVector<T>::TDynamicVector(TDynamicVector&& _vec)
   for (int i = 0; i < size; i++) { pMem[i] = _vec.pMem[i]; }
   _vec.size = NULL;
   delete[] _vec.pMem;
+  _vec.pMem = nullptr;
 }
 
 template<class T>
 TDynamicVector<T>::~TDynamicVector()
 {
+  if (pMem != nullptr) { delete[] pMem; }
   size = NULL;
   pMem = nullptr;
 }
@@ -149,7 +151,9 @@ TDynamicVector<T> TDynamicVector<T>::operator+(const TDynamicVector& _vec)
 {
   if (size != _vec.size || size == 0 || pMem == nullptr) { throw "TDynamicVector operator+ error"; }
   TDynamicVector<T> Result = TDynamicVector<T>(size);
-  for (int i = 0; i < size; i++) { Result.pMem[i] = pMem[i] + _vec.pMem[i]; }
+  for (int i = 0; i < size; i++) {
+    Result.pMem[i] = pMem[i] + _vec.pMem[i];
+  }
   return Result;
 }
 

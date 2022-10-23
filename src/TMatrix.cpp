@@ -14,6 +14,7 @@ TDynamicMatrix<T>::TDynamicMatrix(int _size)
 {
   if (_size > 0) {
     this->size = _size;
+    if (this->pMem != nullptr) { delete[] this->pMem; }
     this->pMem = new TDynamicVector<T>[this->size];
     for (int i = 0; i < this->size; i++) { this->pMem[i] = TDynamicVector<T>(i + 1); }
   }
@@ -81,12 +82,12 @@ TDynamicMatrix<T> TDynamicMatrix<T>::operator*(const TDynamicMatrix& _mat)
   TDynamicMatrix<T> Result = TDynamicMatrix<T>(this->size);
   for (int i = 0; i < this->size; i++)
   {
-    for (int j = 0; j < i + 1; j++)
+    for (int j = 0; j <= i; j++)
     {
       Result[i][j] = 0;
-      for (int k = 0; k < this->size - j; k++)
+      for (int k = j; k <= i; k++)
       {
-        Result[i][j] += this->pMem[i][k] * _mat.pMem[k][j];
+        Result[i][j] += _mat.pMem[i][k] * this->pMem[k][j];
       }
     }
   }
@@ -101,9 +102,9 @@ TDynamicVector<T> TDynamicMatrix<T>::operator*(TDynamicVector<T>& _vec)
   for (int i = 0; i < this->size; i++)
   {
     Result[i] = 0;
-    for (int j = 0; j < i + 1; j++)
+    for (int j = 0; j <= i; j++)
     {
-      Result[i] += this->pMem[j][i] * _vec[i];
+      Result[j] += this->pMem[i][j] * _vec[i];
     }
   }
   return Result;
