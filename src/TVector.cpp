@@ -36,10 +36,8 @@ TDynamicVector<T>::TDynamicVector(TDynamicVector&& _vec)
 {
   if (_vec.size == 0 || _vec.pMem == nullptr || *this == _vec) { throw "TDynamicVector init error"; }
   size = _vec.size;
-  pMem = new T[size];
-  for (int i = 0; i < size; i++) { pMem[i] = _vec.pMem[i]; }
+  pMem = _vec.pMem;
   _vec.size = NULL;
-  delete[] _vec.pMem;
   _vec.pMem = nullptr;
 }
 
