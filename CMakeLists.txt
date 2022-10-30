@@ -22,6 +22,10 @@ include_directories("${MP2_INCLUDE}" gtest)
 
 # BUILD
 add_subdirectory(src)
+add_subdirectory(sample_tdynamicvector)
+add_subdirectory(sample_tdynamicmatrix)
+add_subdirectory(sample_ttoptriandynamicmatrix)
+add_subdirectory(sample_tbottriandynamicmatrix)
 add_subdirectory(gtest)
 add_subdirectory(test)
 

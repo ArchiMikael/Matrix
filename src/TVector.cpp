@@ -174,14 +174,14 @@ T TDynamicVector<T>::operator*(const TDynamicVector& _vec)
 }
 
 template<class T>
-istream& operator>>(istream& istr, TDynamicVector<T>& _vec)
+std::istream& operator>>(std::istream& istr, TDynamicVector<T>& _vec)
 {
   for (int i = 0; i < _vec.size; i++) { istr >> _vec.pMem[i]; }
   return istr;
 }
 
 template<class T>
-ostream& operator<<(ostream& ostr, const TDynamicVector<T>& _vec)
+std::ostream& operator<<(std::ostream& ostr, const TDynamicVector<T>& _vec)
 {
   for (int i = 0; i < _vec.size; i++) { ostr << _vec.pMem[i] << ' '; }
   return ostr;

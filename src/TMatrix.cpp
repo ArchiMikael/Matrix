@@ -1,5 +1,6 @@
 #include <iostream>
 #include "TMatrix.h"
+#include "..\src\TVector.cpp"
 
 template<class T>
 TDynamicMatrix<T>::TDynamicMatrix()
@@ -13,9 +14,8 @@ TDynamicMatrix<T>::TDynamicMatrix(int _size)
 {
   if (_size > 0) {
     this->size = _size;
-    if (this->pMem != nullptr) { delete[] this->pMem; }
     this->pMem = new TDynamicVector<T>[this->size];
-    for (int i = 0; i < this->size; i++) { this->pMem[i] = TDynamicVector<T>(i + 1); }
+    for (int i = 0; i < this->size; i++) { this->pMem[i] = TDynamicVector<T>(this->size); }
   }
   else { throw "TDynamicMatrix init error"; }
 }
@@ -81,10 +81,10 @@ TDynamicMatrix<T> TDynamicMatrix<T>::operator*(const TDynamicMatrix& _mat)
   TDynamicMatrix<T> Result = TDynamicMatrix<T>(this->size);
   for (int i = 0; i < this->size; i++)
   {
-    for (int j = 0; j <= i; j++)
+    for (int j = 0; j < this->size; j++)
     {
       Result[i][j] = 0;
-      for (int k = j; k <= i; k++)
+      for (int k = 0; k < this->size; k++)
       {
         Result[i][j] += _mat.pMem[i][k] * this->pMem[k][j];
       }
@@ -101,9 +101,9 @@ TDynamicVector<T> TDynamicMatrix<T>::operator*(TDynamicVector<T>& _vec)
   for (int i = 0; i < this->size; i++)
   {
     Result[i] = 0;
-    for (int j = 0; j <= i; j++)
+    for (int j = 0; j < this->size; j++)
     {
-      Result[j] += this->pMem[i][j] * _vec[i];
+      Result[i] += this->pMem[j][i] * _vec[j];
     }
   }
   return Result;
@@ -123,7 +123,7 @@ std::istream& operator>>(std::istream& istr, TDynamicMatrix<T>& _mat)
 {
   for (int i = 0; i < _mat.size; i++)
   {
-    for (int j = 0; j < i + 1; j++)
+    for (int j = 0; j < _mat.size; j++)
     {
       istr >> _mat.pMem[i][j];
     }
@@ -136,7 +136,7 @@ std::ostream& operator<<(std::ostream& ostr, const TDynamicMatrix<T>& _mat)
 {
   for (int i = 0; i < _mat.size; i++)
   {
-    for (int j = 0; j < i + 1; j++)
+    for (int j = 0; j < _mat.size; j++)
     {
       ostr << _mat.pMem[i][j] << ' ';
     }
