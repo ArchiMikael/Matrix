@@ -78,15 +78,17 @@ void TDynamicVector<T>::Resize(int nsize)
 template<class T>
 TDynamicVector<T>& TDynamicVector<T>::operator=(const TDynamicVector& _vec)
 {
-  if (*this == _vec) { throw "TDynamicVector operation= error"; }
-  delete[] this->pMem;
-  size = _vec.size;
-  if (size != 0) {
-    pMem = new T[size];
-    for (int i = 0; i < size; i++) { pMem[i] = _vec.pMem[i]; }
+  if (*this != _vec)
+  {
+    delete[] this->pMem;
+    size = _vec.size;
+    if (size != 0) {
+      pMem = new T[size];
+      for (int i = 0; i < size; i++) { pMem[i] = _vec.pMem[i]; }
+    }
+    else { pMem = nullptr; }
+    return *this;
   }
-  else { pMem = nullptr; }
-  return *this;
 }
 
 template<class T>

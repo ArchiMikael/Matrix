@@ -1,14 +1,16 @@
 ﻿#include "TTopTrianMatrix.h"
 #include <iostream>
 #include "..\src\TTopTrianMatrix.cpp"
+#include <ctime>
 
 using namespace std;
 
 void main() {
-  TDynamicTopTrianMatrix<int> mat1(2);
-  cin >> mat1;
-  TDynamicTopTrianMatrix<int> mat2(2);
-  cin >> mat2;
-  TDynamicTopTrianMatrix<int> res = mat1 * mat2;
-  cout << res;
+  TDynamicTopTrianMatrix<int> mat1(1000);
+  TDynamicTopTrianMatrix<int> mat2(1000);
+  unsigned int start_time = clock();
+  TDynamicTopTrianMatrix<int> res = mat1 + mat2;
+  unsigned int end_time = clock();
+  unsigned int op_time = end_time - start_time;
+  cout << op_time;
 }
