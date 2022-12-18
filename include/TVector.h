@@ -5,8 +5,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 template<class T>
 class TDynamicVector
 {
@@ -33,8 +31,10 @@ public:
   T operator*(const TDynamicVector& _vec);
   TDynamicVector& operator=(const TDynamicVector& _vec);
 
-  friend istream& operator>>(istream& istr, TDynamicVector& _vec);
-  friend ostream& operator<<(ostream& ostr, const TDynamicVector& _vec);
+  template<class T>
+  friend std::istream& operator>>(std::istream& istr, TDynamicVector<T>& _vec);
+  template<class T>
+  friend std::ostream& operator<<(std::ostream& ostr, const TDynamicVector<T>& _vec);
 };
 
 #endif

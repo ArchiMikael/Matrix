@@ -25,8 +25,10 @@ public:
   TDynamicVector<T> operator*(TDynamicVector<T>& _vec);
   TDynamicMatrix operator*(const T inp);
 
-  friend std::istream& operator>>(std::istream& istr, TDynamicMatrix& _mat);
-  friend std::ostream& operator<<(std::ostream& ostr, const TDynamicMatrix& _mat);
+  template<class T>
+  friend std::istream& operator>>(std::istream& istr, TDynamicMatrix<T>& _mat);
+  template<class T>
+  friend std::ostream& operator<<(std::ostream& ostr, const TDynamicMatrix<T>& _mat);
 };
 
 #endif

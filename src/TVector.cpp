@@ -78,15 +78,17 @@ void TDynamicVector<T>::Resize(int nsize)
 template<class T>
 TDynamicVector<T>& TDynamicVector<T>::operator=(const TDynamicVector& _vec)
 {
-  if (*this == _vec) { throw "TDynamicVector operation= error"; }
-  delete[] this->pMem;
-  size = _vec.size;
-  if (size != 0) {
-    pMem = new T[size];
-    for (int i = 0; i < size; i++) { pMem[i] = _vec.pMem[i]; }
+  if (*this != _vec)
+  {
+    delete[] this->pMem;
+    size = _vec.size;
+    if (size != 0) {
+      pMem = new T[size];
+      for (int i = 0; i < size; i++) { pMem[i] = _vec.pMem[i]; }
+    }
+    else { pMem = nullptr; }
+    return *this;
   }
-  else { pMem = nullptr; }
-  return *this;
 }
 
 template<class T>
@@ -174,14 +176,14 @@ T TDynamicVector<T>::operator*(const TDynamicVector& _vec)
 }
 
 template<class T>
-istream& operator>>(istream& istr, TDynamicVector<T>& _vec)
+std::istream& operator>>(std::istream& istr, TDynamicVector<T>& _vec)
 {
   for (int i = 0; i < _vec.size; i++) { istr >> _vec.pMem[i]; }
   return istr;
 }
 
 template<class T>
-ostream& operator<<(ostream& ostr, const TDynamicVector<T>& _vec)
+std::ostream& operator<<(std::ostream& ostr, const TDynamicVector<T>& _vec)
 {
   for (int i = 0; i < _vec.size; i++) { ostr << _vec.pMem[i] << ' '; }
   return ostr;
